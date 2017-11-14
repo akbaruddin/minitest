@@ -52,3 +52,33 @@
     }
   }
 }
+
+
+/* box */
+.container-box {
+  width: 250px;
+  margin: 1rem auto;
+
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+    visibility: hidden;
+  }
+
+  .box {
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 1px solid #e6e6e6;
+
+    &-black {
+      background-color: #000;
+      border-color: #000;
+    }
+
+    &.isActive {
+      background-color: #1A237E
+    }
+  }
+}

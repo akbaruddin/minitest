@@ -33,11 +33,20 @@
         isPause = !isPause;
         $(this).find('.icon').toggleClass('icon-pause icon-play');
     });
+  }
 
+  function boxes() {
+    var box = $('.box').not('.box-black');
+
+    box.on('click', function(){
+      box.removeClass('isActive');
+      $(this).addClass('isActive');
+    });
   }
 
   function init() {
     timer();
+    boxes();
   };
 
   App.init = init;
