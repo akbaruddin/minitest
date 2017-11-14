@@ -1,0 +1,54 @@
+@import "lib/reboot";
+
+/* icons */
+.icon {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.icon-play {
+    width: 12px;
+    height: 16px;
+    border-top: 8px solid transparent;
+    border-left: 12px solid #000;
+    border-bottom: 8px solid transparent;
+}
+
+.icon-pause {
+    width: 12px;
+    height: 16px;
+    border-right: 4px solid #000;
+    border-left: 4px solid #000;
+    padding: 0 2px;
+}
+
+/* container */
+.container-timer {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  text-align: center;
+}
+
+/* button */
+.btn {
+  border: 0;
+  cursor: pointer;
+  padding: 12px 6px;
+
+  &:hover {
+    outline: 0;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &-timer {
+    display: inline-block;
+    background-color: #fff;
+
+    span {
+      display: inline-block;
+    }
+  }
+}
