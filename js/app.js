@@ -36,11 +36,34 @@
   }
 
   function boxes() {
-    var box = $('.box').not('.box-black');
+    var _boxesClass = {
+      horizontal: function(element) {
+        $('.box-light').removeClass('box-light');
+        var _parent = $(element).parent();
+        this.boxSelect(_parent.find('.box'));
+      },
+      vertical: function(element) {
+        $('.box-light').removeClass('box-light');
+        var _index = $(element).index() + 1;
+        this.boxSelect($('.row-box .box:nth-child(' + _index + ')'))
+      },
+      boxSelect: function (el) {
+        el.not('.box-black, .isActive').addClass('box-light')
+      }
+    }
 
-    box.on('click', function(){
-      box.removeClass('isActive');
+    var $box = $('.box').not('.box-black');
+    var horizon = "horizontal";
+
+    $box.on('click', function(){
+
+      if ($(this).hasClass('isActive')) {
+        horizon = horizon == "horizontal" ? "vertical" : "horizontal";
+      }
+
+      $box.removeClass('isActive');
       $(this).addClass('isActive');
+      _boxesClass[horizon](this);
     });
   }
 
