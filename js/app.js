@@ -25,14 +25,11 @@
       }
     }
 
-    clock.start();
-    var isPause = false;
+    var isPause = true;
     $("#timer").on("click", function () {
-        if (isPause) {
-          clock.resume();
-        } else {
-          clock.pause();
-        }
+        if (isPause) clock.resume();
+        else clock.pause();
+
         isPause = !isPause;
         $(this).find('.icon').toggleClass('icon-pause icon-play');
     });
