@@ -52,6 +52,7 @@
       element.not('.box-black, .isActive').addClass('box-light')
     },
     currentBox: function(element, container) {
+
       if ($(element).hasClass('isActive')) {
         this.horizon = this.horizon == "horizontal" ? "vertical" : "horizontal";
       }
@@ -60,11 +61,45 @@
       $(element).addClass('isActive');
       this[this.horizon](element);
     },
-    nextBox: function(element, box) {
+    checkRow: function (element) {
       var _index = $(element).index();
-      var nextElement = $(element).parent().children().eq(_index >= 4 ? 0 : _index + 1);
-      debugger;
-      if (nextElement.text().length) {
+      var row = $(element).parent().children();
+      var nextrow = this.filterCheck(row);
+
+      var indexing = _index >= 4 ? 0 : _index + 1;
+      if (!nextrow.length) {
+        var $next = $(element).parent().next()
+        row = $next.children();
+        indexing = 0;
+
+        if (!this.finalCheck()) return {};
+
+        if ($next.index() == -1) {
+          row = $(element).parents('.box-all').children().first().children();
+        }
+
+      }
+      return row.eq(indexing);
+    },
+    filterCheck: function(elements) {
+      var $el = elements.filter(function(){ return !$(this).text().length; });
+          $el = $el.filter(function() { return !$(this).hasClass('box-black'); });
+      return $el;
+    },
+    finalCheck: function() {
+      var totalElement = this.filterCheck($('.box'));
+      return totalElement.length;
+    },
+    stopAll: function () {
+      $('.text-full').addClass('alert').html('All Full');
+      return;
+    },
+    nextBox: function(element, box) {
+      var nextElement = this.checkRow(element);
+
+      if($.isEmptyObject(nextElement)) this.stopAll();
+
+      if ($(nextElement).text().length || $(nextElement).hasClass('box-black')) {
         this.nextBox(nextElement, box)
       } else {
         this.currentBox(nextElement, box);
@@ -84,12 +119,21 @@
   function keyboardEvnt () {
     var $box = $('.box').not('.box-black');
 
-    $('.keyboard span').on('click', function() {
-      var char = $(this).text();
+    $('.keyboard .letter').on('click', function() {
       var curElement = $('.isActive');
 
+      if($(curElement).text().length) {
+        return;
+      }
+
+      var char = $(this).text();
       curElement.text(char);
       _boxesClass.nextBox(curElement, $box);
+    });
+
+    $('.keyboard .letter-remove').on('click', function() {
+      var curElement = $('.isActive');
+      curElement.html('');
     });
   }
 
