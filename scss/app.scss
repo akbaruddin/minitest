@@ -1,5 +1,14 @@
 @import "lib/reboot";
 
+.clearfix {
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+    visibility: hidden;
+  }
+}
+
 /* icons */
 .icon {
   display: inline-block;
@@ -56,15 +65,9 @@
 
 /* box */
 .container-box {
+  @extend .clearfix;
   width: 250px;
   margin: 1rem auto;
-
-  &:after {
-    content: '';
-    clear: both;
-    display: table;
-    visibility: hidden;
-  }
 
   .box {
     width: 50px;
@@ -85,5 +88,50 @@
       background-color: #0D47A1;
     }
 
+  }
+}
+
+.container-keyboard {
+  position: absolute;
+  bottom: 0;
+  background: #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.keyboard {
+  @extend .clearfix;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+
+  li {
+    margin: 0 3px 3px 0;
+    width: 36px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #f9f9f9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.08);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.08);
+
+    &:hover {
+      position: relative;
+      top: 1px;
+      left: 1px;
+      border-color: #e5e5e5;
+      cursor: pointer;
+    }
   }
 }
