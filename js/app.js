@@ -81,6 +81,20 @@
       }
       return row.eq(indexing);
     },
+    checkCol: function (element) {
+      var _index = $(element).index();
+      var _pIndex = $(element).parent().index();
+      var pindexing = _pIndex >= 4 ? 0: _pIndex + 1;
+      var indexing = _index >= 4 ? 0: _index + 1;
+      var col = $('.row-box').eq(pindexing).children('.box').eq(_index);
+      var nextCol = this.filterCheck(col);
+
+      if (!nextCol.length) {
+        col = $('.row-box').eq(pindexing).children('.box').eq(indexing);
+      }
+
+      return col;
+    },
     filterCheck: function(elements) {
       var $el = elements.filter(function(){ return !$(this).text().length; });
           $el = $el.filter(function() { return !$(this).hasClass('box-black'); });
@@ -95,7 +109,13 @@
       return;
     },
     nextBox: function(element, box) {
-      var nextElement = this.checkRow(element);
+      var nextElement = {};
+
+      if (this.horizon == "horizontal") {
+        nextElement = this.checkRow(element);
+      } else {
+        nextElement = this.checkCol(element);
+      }
 
       if($.isEmptyObject(nextElement)) this.stopAll();
 
