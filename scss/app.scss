@@ -31,6 +31,15 @@
     padding: 0 2px;
 }
 
+.icon-back {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjYiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyNiAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMS43NTMgMGgxMC4yNEMyNC4yMDcgMCAyNiAxLjc5MiAyNiA0djEyYzAgMi4yMS0xLjc4NyA0LTQuMDA2IDRINy41bC03LTEwIDctMTBoNC4yNTN6IiBmaWxsPSIjQjZDOUQ5Ii8+PHBhdGggZD0iTTEyIDYuNWw3LjQzIDcuMjU4TTE5LjQyOCA2LjVsLTcuNDMgNy4yNTgiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvZz48L3N2Zz4=);
+  height: 20px;
+  width: 26px;
+  vertical-align: baseline;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /* container */
 .container-timer {
   background-color: #fff;
@@ -117,7 +126,7 @@
     width: 36px;
     height: 50px;
     line-height: 50px;
-    font-size: 30px;
+    font-size: 28px;
     font-family: verdana, Arial, serif;
     text-align: center;
     background: #fff;
