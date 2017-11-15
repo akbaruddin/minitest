@@ -37,6 +37,7 @@
   }
 
   var _boxesClass = {
+    horizon: "horizontal",
     horizontal: function(element) {
       $('.box-light').removeClass('box-light');
       var _parent = $(element).parent();
@@ -49,29 +50,53 @@
     },
     boxSelect: function (element) {
       element.not('.box-black, .isActive').addClass('box-light')
+    },
+    currentBox: function(element, container) {
+      if ($(element).hasClass('isActive')) {
+        this.horizon = this.horizon == "horizontal" ? "vertical" : "horizontal";
+      }
+
+      container.removeClass('isActive');
+      $(element).addClass('isActive');
+      this[this.horizon](element);
+    },
+    nextBox: function(element, box) {
+      var _index = $(element).index();
+      var nextElement = $(element).parent().children().eq(_index >= 4 ? 0 : _index + 1);
+      debugger;
+      if (nextElement.text().length) {
+        this.nextBox(nextElement, box)
+      } else {
+        this.currentBox(nextElement, box);
+      }
     }
   };
 
   function boxes() {
 
     var $box = $('.box').not('.box-black');
-    var horizon = "horizontal";
 
     $box.on('click', function(){
+      _boxesClass.currentBox(this, $box);
+    });
+  }
 
-      if ($(this).hasClass('isActive')) {
-        horizon = horizon == "horizontal" ? "vertical" : "horizontal";
-      }
+  function keyboardEvnt () {
+    var $box = $('.box').not('.box-black');
 
-      $box.removeClass('isActive');
-      $(this).addClass('isActive');
-      _boxesClass[horizon](this);
+    $('.keyboard span').on('click', function() {
+      var char = $(this).text();
+      var curElement = $('.isActive');
+
+      curElement.text(char);
+      _boxesClass.nextBox(curElement, $box);
     });
   }
 
   function init() {
     timer();
     boxes();
+    keyboardEvnt();
   };
 
   App.init = init;
