@@ -92,6 +92,10 @@
       if (!this.finalCheck()) return {};
 
       if (!nextCol.length) {
+        col = $('.row-box').eq(pindexing).children('.box').eq(_index);
+      }
+
+      if (_pIndex >= 4) {
         pindexing = 0;
         col = $('.row-box').eq(pindexing).children('.box').eq(indexing);
       }
