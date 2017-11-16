@@ -89,7 +89,10 @@
       var col = $('.row-box').eq(pindexing).children('.box').eq(_index);
       var nextCol = this.filterCheck(col);
 
+      if (!this.finalCheck()) return {};
+
       if (!nextCol.length) {
+        pindexing = 0;
         col = $('.row-box').eq(pindexing).children('.box').eq(indexing);
       }
 
