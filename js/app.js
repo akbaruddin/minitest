@@ -131,6 +131,34 @@
       } else {
         this.currentBox(nextElement, box);
       }
+    },
+    clearRow: function (element) {
+      var _index = $(element).index();
+      var row = $(element).parent().children();
+      var indexing = _index >= 0 ? _index - 1 : 4;
+      debugger;
+      return row.eq(indexing);
+    },
+    clearCol: function (element) {
+      var _index = $(element).index();
+      var _pIndex = $(element).parent().index();
+      var pindexing = _pIndex >= 0 ? _pIndex - 1: 4;
+      return $('.row-box').eq(pindexing).children('.box').eq(_index);
+    },
+    clearBox: function(element, box) {
+      var prevElement = {};
+
+      if (this.horizon == "horizontal") {
+        prevElement = this.clearRow(element);
+      } else {
+        prevElement = this.clearCol(element);
+      }
+
+      if ($(prevElement).hasClass('box-black')) {
+        this.clearBox(prevElement, box)
+      } else {
+        this.currentBox(prevElement, box);
+      }
     }
   };
 
@@ -161,6 +189,7 @@
     $('.keyboard .letter-remove').on('click', function() {
       var curElement = $('.isActive');
       curElement.html('');
+      _boxesClass.clearBox(curElement, $box);
     });
   }
 
